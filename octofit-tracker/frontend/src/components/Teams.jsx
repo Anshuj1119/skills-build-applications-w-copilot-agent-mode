@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react'
 
 const getApiBase = (path) => {
-  const template = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/${path}`
   const name = import.meta.env.VITE_CODESPACE_NAME
-  return name ? `${template}/` : `http://localhost:8000/api/${path}/`
+  const routes = {
+    activities: '/api/activities/',
+    leaderboard: '/api/leaderboard/',
+    teams: '/api/teams/',
+    users: '/api/users/',
+    workouts: '/api/workouts/',
+  }
+  const route = routes[path]
+  return route ? (name ? `https://${name}-8000.app.github.dev${route}` : `http://localhost:8000${route}`) : ''
 }
 
 function normalize(responseBody, key) {
