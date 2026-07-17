@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const getApiBase = (path) => {
-  const name = import.meta.env.VITE_CODESPACE_NAME
-
-  if (path === 'workouts') {
-    return name
-      ? `https://${name}-8000.app.github.dev/api/workouts`
-      : 'http://localhost:8000/api/workouts'
-  }
-
-  return name
-    ? `https://${name}-8000.app.github.dev/api/${path}`
-    : `http://localhost:8000/api/${path}`
-}
+const getApiBase = (path) => `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/${path}`
 
 function normalize(responseBody, key) {
   if (Array.isArray(responseBody)) return responseBody

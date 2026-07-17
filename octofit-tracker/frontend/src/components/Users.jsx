@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-const getApiBase = (path) => {
-  const name = import.meta.env.VITE_CODESPACE_NAME
-  const route = `/api/${path}/`
-  return name ? `https://${name}-8000.app.github.dev${route}` : `http://localhost:8000${route}`
-}
+const getApiBase = (path) => `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/${path}`
 
 function normalize(responseBody, key) {
   if (Array.isArray(responseBody)) return responseBody
   if (responseBody && Array.isArray(responseBody[key])) return responseBody[key]
-  // fallback: find first array
   for (const v of Object.values(responseBody || {})) {
     if (Array.isArray(v)) return v
   }
