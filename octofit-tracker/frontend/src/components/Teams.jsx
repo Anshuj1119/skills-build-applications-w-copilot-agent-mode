@@ -19,7 +19,7 @@ export default function Teams() {
 
   useEffect(() => {
     const api = getApiBase()
-    fetch(`${api}/teams`)
+    fetch(`${api}/teams/`)
       .then((r) => r.json())
       .then((body) => setTeams(normalize(body, 'teams')))
       .catch(() => setTeams([]))

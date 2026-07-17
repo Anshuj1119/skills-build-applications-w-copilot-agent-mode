@@ -20,7 +20,7 @@ export default function Users() {
 
   useEffect(() => {
     const api = getApiBase()
-    fetch(`${api}/users`)
+    fetch(`${api}/users/`)
       .then((r) => r.json())
       .then((body) => setUsers(normalize(body, 'users')))
       .catch(() => setUsers([]))

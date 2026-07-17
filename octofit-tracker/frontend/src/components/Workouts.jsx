@@ -19,7 +19,7 @@ export default function Workouts() {
 
   useEffect(() => {
     const api = getApiBase()
-    fetch(`${api}/workouts`)
+    fetch(`${api}/workouts/`)
       .then((r) => r.json())
       .then((body) => setWorkouts(normalize(body, 'workouts')))
       .catch(() => setWorkouts([]))

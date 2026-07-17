@@ -19,7 +19,7 @@ export default function Activities() {
 
   useEffect(() => {
     const api = getApiBase()
-    fetch(`${api}/activities`)
+    fetch(`${api}/activities/`)
       .then((r) => r.json())
       .then((body) => setActivities(normalize(body, 'activities')))
       .catch(() => setActivities([]))

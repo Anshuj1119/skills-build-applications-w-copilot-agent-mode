@@ -19,7 +19,7 @@ export default function Leaderboard() {
 
   useEffect(() => {
     const api = getApiBase()
-    fetch(`${api}/leaderboard`)
+    fetch(`${api}/leaderboard/`)
       .then((r) => r.json())
       .then((body) => setEntries(normalize(body, 'leaderboard')))
       .catch(() => setEntries([]))
