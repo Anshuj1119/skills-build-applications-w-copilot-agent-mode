@@ -2,15 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 const getApiBase = (path) => {
   const name = import.meta.env.VITE_CODESPACE_NAME
-  const routes = {
-    activities: '/api/activities/',
-    leaderboard: '/api/leaderboard/',
-    teams: '/api/teams/',
-    users: '/api/users/',
-    workouts: '/api/workouts/',
-  }
-  const route = routes[path]
-  return route ? (name ? `https://${name}-8000.app.github.dev${route}` : `http://localhost:8000${route}`) : ''
+  const route = `/api/${path}/`
+  return name ? `https://${name}-8000.app.github.dev${route}` : `http://localhost:8000${route}`
 }
 
 function normalize(responseBody, key) {
