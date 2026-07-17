@@ -5,10 +5,13 @@ import teamsRouter from './routes/teams.js';
 import activitiesRouter from './routes/activities.js';
 import leaderboardRouter from './routes/leaderboard.js';
 import workoutsRouter from './routes/workouts.js';
-import { apiUrl } from './config/codespaces.js';
 
 const app = express();
 const port = process.env.PORT ? Number(process.env.PORT) : 8000;
+const codespaceName = process.env.CODESPACE_NAME;
+const apiUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : `http://localhost:${port}`;
 
 app.use(express.json());
 
@@ -34,5 +37,3 @@ async function startServer() {
 }
 
 startServer();
-
-export default app;
