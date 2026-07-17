@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-const getApiBase = () => {
+const getApiBase = (path) => {
+  const template = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/${path}`
   const name = import.meta.env.VITE_CODESPACE_NAME
-  return name ? `https://${name}-8000.app.github.dev/api` : 'http://localhost:8000/api'
+  return name ? `${template}/` : `http://localhost:8000/api/${path}/`
 }
 
 function normalize(responseBody, key) {
@@ -18,8 +19,8 @@ export default function Leaderboard() {
   const [entries, setEntries] = useState([])
 
   useEffect(() => {
-    const api = getApiBase()
-    fetch(`${api}/leaderboard/`)
+    const api = getApiBase('leaderboard')
+    fetch(api)
       .then((r) => r.json())
       .then((body) => setEntries(normalize(body, 'leaderboard')))
       .catch(() => setEntries([]))

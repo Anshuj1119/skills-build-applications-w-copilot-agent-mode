@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
-const getApiBase = () => {
+const getApiBase = (path) => {
+  const template = `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/${path}`
   const name = import.meta.env.VITE_CODESPACE_NAME
-  return name ? `https://${name}-8000.app.github.dev/api` : 'http://localhost:8000/api'
+  return name ? `${template}/` : `http://localhost:8000/api/${path}/`
 }
 
 function normalize(responseBody, key) {
@@ -18,8 +19,8 @@ export default function Activities() {
   const [activities, setActivities] = useState([])
 
   useEffect(() => {
-    const api = getApiBase()
-    fetch(`${api}/activities/`)
+    const api = getApiBase('activities')
+    fetch(api)
       .then((r) => r.json())
       .then((body) => setActivities(normalize(body, 'activities')))
       .catch(() => setActivities([]))
